@@ -44,7 +44,7 @@ public class SpoutTestTopology {
 			config.setDebug(false);
 			config.setNumAckers(20);
             config.setNumWorkers(4);
-            config.setMaxTaskParallelism(20);
+            config.setMaxTaskParallelism(60);
             config.setMaxSpoutPending(5000);
             config.put(Config.TOPOLOGY_RECEIVER_BUFFER_SIZE,             8);
             config.put(Config.TOPOLOGY_TRANSFER_BUFFER_SIZE,            32);
