@@ -27,7 +27,6 @@ public class AckBolt implements Serializable, IRichBolt {
 	
 	@Override
 	public void execute(Tuple input) {
-		collector.emit(input, new Values("1"));
 		collector.ack(input);
 	}
 
