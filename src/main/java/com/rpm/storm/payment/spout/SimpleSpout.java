@@ -1,8 +1,6 @@
 package com.rpm.storm.payment.spout;
 
 import java.util.Map;
-import java.util.concurrent.TimeUnit;
-import java.util.concurrent.atomic.AtomicInteger;
 
 import backtype.storm.spout.SpoutOutputCollector;
 import backtype.storm.task.TopologyContext;
@@ -16,7 +14,7 @@ import com.google.common.base.Stopwatch;
 public class SimpleSpout extends BaseRichSpout {
 	private static final long serialVersionUID = 59040927882658334L;
 	
-	private static AtomicInteger count = new AtomicInteger(0);
+	//private static AtomicInteger count = new AtomicInteger(0);
 
 	private static Stopwatch stopwatch = new Stopwatch();
 	SpoutOutputCollector collector;
@@ -24,7 +22,7 @@ public class SimpleSpout extends BaseRichSpout {
 	@SuppressWarnings("rawtypes")
 	public void open(Map conf, TopologyContext context, SpoutOutputCollector collector) {
 		this.collector = collector;
-		if(!stopwatch.isRunning()) stopwatch.start();
+		//if(!stopwatch.isRunning()) stopwatch.start();
 	}
 
 	public void nextTuple() {
@@ -37,8 +35,8 @@ public class SimpleSpout extends BaseRichSpout {
 
 	@Override
 	public void ack(Object msgId) {
-		count.incrementAndGet();
-		if(count.get() % 1000 == 0) System.out.println(count.get() + " " + stopwatch.elapsedTime(TimeUnit.MILLISECONDS));
+		//count.incrementAndGet();
+		//if(count.get() % 1000 == 0) System.out.println(count.get() + " " + stopwatch.elapsedTime(TimeUnit.MILLISECONDS));
 	}
 	
 }

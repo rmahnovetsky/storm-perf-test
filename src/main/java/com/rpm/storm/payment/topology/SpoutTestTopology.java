@@ -38,7 +38,7 @@ public class SpoutTestTopology {
 
 		builder.setSpout("KAFKA_SPOUT", new KafkaSpout(spoutConfig), 20);
 
-        builder.setBolt("ACK_BOLT", new AckBolt(), 20).shuffleGrouping("KAFKA_SPOUT");
+        builder.setBolt("ACK_BOLT", new AckBolt(), 20).localOrShuffleGrouping("KAFKA_SPOUT");
 
 		if (args != null && args.length > 0) {
 			config.setDebug(false);

@@ -14,13 +14,13 @@ public class SpoutTestTopology2 {
         Config config = new Config();
 		TopologyBuilder builder = new TopologyBuilder();
 
-		builder.setSpout("SIMPLE_SPOUT", new SimpleSpout(), 20);
+		builder.setSpout("SIMPLE_SPOUT", new SimpleSpout(), 10);
 
-        builder.setBolt("ACK_BOLT", new AckBolt(), 20).shuffleGrouping("SIMPLE_SPOUT");
+        builder.setBolt("ACK_BOLT", new AckBolt(), 20).localOrShuffleGrouping("SIMPLE_SPOUT");
 
 		if (args != null && args.length > 0) {
 			config.setDebug(false);
-			config.setNumAckers(20);
+			config.setNumAckers(0);
             config.setNumWorkers(4);
             config.setMaxTaskParallelism(60);
             config.setMaxSpoutPending(5000);
@@ -32,10 +32,10 @@ public class SpoutTestTopology2 {
 			StormSubmitter.submitTopology("SPOUT_TEST2", config, builder.createTopology());
 		} else {
 			config.setDebug(false);
-            config.setNumWorkers(1);
-            config.setNumAckers(0);
+            config.setNumWorkers(4);
+            config.setNumAckers(4);
             config.setMaxTaskParallelism(60);
-            config.setMaxSpoutPending(1000);
+            config.setMaxSpoutPending(5000);
             config.put(Config.TOPOLOGY_RECEIVER_BUFFER_SIZE,             8);
             config.put(Config.TOPOLOGY_TRANSFER_BUFFER_SIZE,            32);
             config.put(Config.TOPOLOGY_EXECUTOR_RECEIVE_BUFFER_SIZE, 16384);
